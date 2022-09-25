@@ -127,9 +127,16 @@ body  {
     }
 
     .photobox {
+        position: relative;
         width: 23.5%;
         margin-bottom: 20px;
        
+    }
+
+    .photobox>img {
+        position: absolute;
+        top: 10px;
+        right: 10px;
     }
 
     .photo {
@@ -144,8 +151,11 @@ body  {
     }
 
     .photo_text {
-        background-color: rgb(244, 232, 216);
+        position: absolute;
+        bottom: 0px;
+        background-color: rgba(255, 255, 255, 0.597);
         height: 50px;
+        width: 100%;
         text-align: center;
         line-height: 50px;
         
