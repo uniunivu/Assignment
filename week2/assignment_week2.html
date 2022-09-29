@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Help bootcamp assignment week 2</title>
+</head>
+
+<body>
+
+    <h4>請看主控台。</h4>
+    <script>
+        console.log("--------要求一----------")
+
+        //要求一 ok
+        function calculate(min, max, step) {
+            let x = 0;
+            for (i = min; i <= max; i = i + step) {
+                //i 等於 min 每一次加上step的值, 它是這個數列裡面在變化的那個數字
+                x = x + i;
+                // x 也跟著i在變化
+                // x =              x  + i
+                // x =              0  + 1
+                // x =           (0+1) + 1+1
+                // x = [(0+1) + (1+1)] + (1+1)+1
+                // console.log('數列值：'+i); 
+                // console.log('總和：'+x);
+            };
+            console.log(x);
+
+
+            // 請用你的程式補完這個函式的區塊
+        };
+
+
+        calculate(1, 3, 1); // 你的程式要能夠計算 1+2+3，最後印出 6
+        calculate(4, 8, 2); // 你的程式要能夠計算 4+6+8，最後印出 18
+        calculate(-1, 2, 2); // 你的程式要能夠計算 -1+1，最後印出 0
+
+
+        console.log("---------要求二-----------")
+
+        //要求二 ok
+        /*
+        完成以下函式，正確計算出非 manager 的員工平均薪資，
+        所謂非 manager 就是在資料中
+        manager 欄位標註為 False (Python) 或 false (JavaScript) 的員工，
+        程式需考慮員工資料數量不定的情況。*/
+        function avg(data) {
+            let length = data.employees.length;
+            let employees = data.employees;
+            // console.log(employees);
+            // console.log(i);
+            // console.log(length);
+
+            let sum = 0; //薪資總和
+            let num = 0;  //人數
+
+            for (x = 0; x < length; x++) {
+                let salary = employees[x].salary;
+                let manager = employees[x].manager;
+
+                if (manager) {
+                    salary = 0;
+                };
+
+
+                if (!manager) {
+                    num = num + 1;
+                    // console.log('不是manager的數量=' + num);
+                } else {
+                    // console.log('我是manager');
+                }
+
+
+                // console.log('員工編號：' + x);
+                // console.log('是否為manager：' + manager);
+                // console.log('經過if判斷後的薪資：' + salary);
+                sum = sum + salary;
+                // console.log('目前總合為=' + sum)
+            };
+
+            // console.log('最後總和=' + sum);
+            // console.log('非manager的總人數=' + num);
+            average = sum / num;
+            console.log(average)
+
+
+
+            // 請用你的程式補完這個函式的區塊
+        };
+
+        avg({
+            "employees": [
+                {
+                    "name": "John",
+                    "salary": 30000,
+                    "manager": false
+                },
+                {
+                    "name": "Bob",
+                    "salary": 60000,
+                    "manager": true
+                },
+                {
+                    "name": "Jenny",
+                    "salary": 50000,
+                    "manager": false
+                },
+                {
+                    "name": "Tony",
+                    "salary": 40000,
+                    "manager": false
+                }
+            ]
+        }); // 呼叫 avg 函式
+
+        //-----------------------test-------------------
+
+        // avg({
+        //     "employees": [
+        //         {
+        //             "name": "John",
+        //             "salary": 30000,
+        //             "manager": false
+        //         },
+        //         {
+        //             "name": "Bob",
+        //             "salary": 60000,
+        //             "manager": true
+        //         },
+        //         {
+        //             "name": "Jenny",
+        //             "salary": 50000,
+        //             "manager": false
+        //         },
+        //         {
+        //             "name": "Tony",
+        //             "salary": 40000,
+        //             "manager": false
+        //         },
+        //         {
+        //             "name": "Yunxuan",
+        //             "salary": 30000,
+        //             "manager": false
+        //         },
+        //         {
+        //             "name": "sisisi",
+        //             "salary": 70000,
+        //             "manager": false
+        //         }
+
+        //     ]
+        // }); // 呼叫 avg 函式
+
+
+
+        console.log("---------要求三-----------")
+
+        //要求三ok
+
+        function func(a) {
+
+
+            function f(b,c) {
+                // console.log(a);
+                // console.log(b);
+                // console.log(c);
+                let answer = a + (b * c);
+                console.log(answer);
+            };
+
+            //f 是 func的子函數 
+            //func(a)(b,c); b,c兩個變數的值 是傳到子函數f
+            //要 return子函數 f，這樣func()()才能連續進行
+
+            return f;
+
+            // 請用你的程式補完這個函式的區塊
+        };
+
+        //func 這個function裡面還有一個function可以接收變數
+
+        func(2)(3, 4); // 你補完的函式能印出 2+(3*4) 的結果 14
+        func(5)(1, -5); // 你補完的函式能印出 5+(1*-5) 的結果 0
+        func(-3)(2, 9); // 你補完的函式能印出 -3+(2*9) 的結果 15
+        // 一般形式為 func(a)(b, c) 要印出 a+(b*c) 的結果
+
+
+
+
+
+        console.log("---------要求四------------")
+
+        //要求四 ok
+        //找出至少包含兩筆整數的列表 (Python) 或陣列 (JavaScript) 中，
+        //兩兩數字相乘後的最大值。
+
+
+        function maxProduct(nums) {
+
+            // 想法：把陣列的數字先篩選掉每一次要乘的某數後，開始互乘
+            // 互乘後成為新的陣列，並將這些互乘數字的陣列結合起來
+            // 從最後結合的陣列中，找出相乘的最大值。
+            let nums_length = nums.length;
+            // console.log(nums);  //陣列
+            // console.log(nums_length); // 4
+            let newnum = []; // 設為空陣列
+
+
+            for (i = 0; i < nums_length; i++) {
+                //導出陣列裡的每個數字
+                // console.log(nums[i]);
+                let a = nums[i]; //被乘數
+                // console.log('a='+a);
+
+                let newnums = nums.filter(check);
+
+                function check(t) {
+                    // console.log('t='+t);
+                    // console.log('a='+a);
+                    return t != a;
+                };
+                // console.log(newnums);
+
+                //所有的數字互相乘
+                let nums1 = newnums.map(numnum => numnum * a);
+                // console.log(nums1); 
+                //結合乘完後的陣列
+                newnum = newnum.concat(nums1);
+                // newnum = newnum.concat(nums1);
+                // console.log(newnum);
+            };
+
+            // console.log(newnum);
+            //導出陣列的最大值
+            let max = Math.max(...newnum);
+            console.log(max);
+
+
+            // let min = Math.min(...nums);
+            // let max = Math.max(...nums);
+            // console.log('最小值：'+min);
+            // console.log('最大值：'+max);
+
+
+
+            // 請用你的程式補完這個函式的區塊
+        }
+        maxProduct([5, 20, 2, 6]) // 得到 120
+        maxProduct([10, -20, 0, 3]) // 得到 30
+        maxProduct([10, -20, 0, -3]) // 得到 60
+        maxProduct([-1, 2]) // 得到 -2
+        maxProduct([-1, 0, 2]) // 得到 0 或 -0
+        maxProduct([5, -1, -2, 0]) // 得到 2
+        maxProduct([-5, -2]) // 得到 10
+
+        console.log("---------要求五----------")
+
+        //要求五 ok
+        // Given an array of integers, show indices of the two numbers such that they add up to a
+        // specific target. You can assume that each input would have exactly one solution, and you
+        // can not use the same element twice.
+        function twoSum(nums, target) {
+            // console.log(nums); // 2 11 7 15
+            // console.log(target); //9
+
+
+            for (i = 0; i < nums.length; i++) {
+                // console.log('nums[i]=' + nums[i]); //第一個數
+                // console.log("---------------以下算nums[k]-------------")
+                let answerNumber = target - nums[i];
+
+                for (k = i + 1; k < nums.length; k++) {
+                    // k =i+1; i才不會和自己重複到
+                    // console.log('nums[k]=' + nums[k]); //第二個數
+                    if (nums[k] == answerNumber) {
+                        // console.log('符合的nums[i]=' + nums[i]);
+                        // console.log('符合的nums[k]=' + nums[k]);
+
+                        // console.log(i);
+                        // console.log(k);
+
+                        return [i, k];
+                    }
+
+                };
+            };
+
+
+
+            // your code here
+
+            //target的值，是這個陣列裡的某兩個數相加，而結果要顯示出這兩個數的陣列位置，成為新陣列
+        };
+        let result = twoSum([2, 11, 7, 15], 9);
+        console.log(result); // show [0, 2] because nums[0]+nums[2] is 9
+
+        console.log("---------要求六-----------")
+
+        //要求六 ok
+        //給定只會包含 0 或 1 兩種數字的列表 (Python) 或陣列 (JavaScript)，
+        //計算連續出現 0 的最大長度。
+
+
+        function maxZeros(nums) {
+
+            let count = 0;
+            let countnumber =[];
+            for(i=0;i<nums.length;i++) {
+
+                // console.log('跳進去的i值'+i+'跳進去的值'+nums[i]);
+
+                if(nums[i]!=0){
+                    count = 0;
+
+                } else {
+                    count = count +1;
+
+                };
+                // console.log(count);
+                //把所有計算有0的次數變成一個新陣列
+                countnumber.push(count);
+            };
+
+            // console.log(countnumber);
+            //再從新陣列裡面找出最大值(算最多次的)
+            let countMax = Math.max(...countnumber);
+            console.log(countMax);
+
+            // 請用你的程式補完這個函式的區塊
+        };
+
+
+
+        maxZeros([0, 1, 0, 0]); // 得到 2
+        maxZeros([1, 0, 0, 0, 0, 1, 0, 1, 0, 0]); // 得到 4
+        maxZeros([1, 1, 1, 1, 1]); // 得到 0
+        maxZeros([0, 0, 0, 1, 1]) // 得到 3
+
+
+
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>
