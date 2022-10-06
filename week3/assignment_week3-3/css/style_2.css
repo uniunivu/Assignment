@@ -1,0 +1,213 @@
+body  {
+    margin: 0px;
+}
+
+
+@media (max-width: 1920px) {
+
+    * {
+        font-size: 20px;
+    }
+
+    a {
+        text-decoration: none;
+        color: rgb(116, 116, 116);
+    }
+
+    a:hover {
+        color: rgb(154, 154, 154);
+    }
+
+    #hamburger_nav {
+        position: absolute;
+        display: none;
+        list-style: none;
+        right: 5px;
+        top: 25px;
+        padding: 15px;
+        background-color: rgba(255, 255, 255, 0.512);
+        border-radius: 5px;
+        line-height: 35px;
+    }
+
+
+    /*----------------------- 01 nav banner --------------------*/
+
+    .nav {
+        display: flex;
+        height: 40px;
+        justify-content: space-between;
+        align-items: center;
+        
+    }
+
+    .nav_title {
+        padding: 0 20px;
+    }
+
+    .itemlist {
+        display: flex;
+        
+    } 
+    
+    .item {
+        padding: 0 10px;
+
+    }
+
+    .item:nth-of-type(5) {
+        display: none;
+    }
+
+    .item:nth-of-type(5)>img {
+        height: 30px;
+        width: 40px;
+    }
+
+    
+    /*--------------------- 02 hero banner --------------------*/
+
+    .herobanner {
+        background-color: rgb(240, 236, 229);
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    main {
+        max-width: 1200px;
+        margin: 20px auto;
+    }
+
+    /*----------------------- 03 titlebox ----------------------*/
+
+    .titlebox {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        justify-content: space-between;
+        align-content: space-between;
+
+    }
+
+    .box {
+        width: 49%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        height: 50px;
+        background-color: rgb(243, 237, 227);
+    }
+
+    .boxphoto {
+        height: 100%;
+    }
+
+    .boxphoto>img {
+        width: 80px;
+        height: 50px;
+        object-fit: cover;
+
+    }
+
+    .boxtitle {
+        margin-left: 20px;
+    }
+
+
+    /* ---------------------04 photobox ----------------------*/
+
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .photobox {
+        position: relative;
+        width: 23.5%;
+        margin-bottom: 20px;
+       
+    }
+
+    .photobox>img {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .photo {
+        max-width: 100%;
+        height: 190px;
+    }
+
+    .photo>img {
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+    }
+
+    .photo_text {
+        position: absolute;
+        bottom: 0px;
+        background-color: rgba(255, 255, 255, 0.597);
+        height: 50px;
+        width: 100%;
+        text-align: center;
+        line-height: 50px;
+        
+    }
+
+
+
+}
+
+
+@media(max-width: 1200px) {
+
+    main {
+        max-width: 90%;
+    }
+
+    .photobox {
+        width: 49%;
+    }
+
+
+}
+
+
+@media(max-width: 600px) {
+
+
+
+    .box {
+        width: 100%;
+        margin-top: 20px;
+        
+    }
+
+    .photobox {
+        width: 100%;
+    }
+    
+    .item {
+        display: none;
+    }
+    .item:nth-of-type(5) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    
+
+    
+    
+        
+}
+
+
