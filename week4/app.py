@@ -1,4 +1,3 @@
-from email import message
 from flask import Flask
 from flask import request
 from flask import redirect
@@ -48,6 +47,17 @@ def error():
 def signout():
     session.pop("username", None)
     return render_template("signout.html")
+
+@app.route("/count")
+def count():
+        return redirect(url_for('square', square_num=request.args.get("sq-number")))
+
+@app.route("/square/<square_num>")
+def square(square_num):
+    square_num=int(square_num)
+    result = square_num**2
+    return render_template("square.html",num=result)
+
 
 app.run(port=3000)
 
