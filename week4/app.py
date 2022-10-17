@@ -33,8 +33,11 @@ def signin():
 
 @app.route("/member")
 def member():
-    name=session["username"]
-    return render_template("member.html",n=name)
+    if 'username' in session:
+        name=session["username"]
+        return render_template("member.html",n=name)
+    else:
+        return redirect("/")
 
 @app.route("/error")
 def error():
