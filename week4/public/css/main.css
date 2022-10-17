@@ -1,0 +1,26 @@
+.login_box {
+    margin: 100px auto;
+    width: 600px;
+    background-color: rgb(246, 246, 246);
+    text-align: center;
+}
+
+.header {
+    background-color: rgb(227, 217, 206);
+    padding: 20px;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.login_form {
+    font-weight: 600;
+    padding: 10px;
+}
+
+.login_form button {
+    margin:15px;
+    padding: 8px;
+    background-color: rgb(227, 217, 206);
+    border: none;
+    color:rgb(145, 134, 127)
+}
