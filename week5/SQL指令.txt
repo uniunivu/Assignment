@@ -1,0 +1,67 @@
+SHOW databases;
+CREATE DATABASE website;
+USE website;
+SHOW TABLES;
+CREATE TABLE member (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT'獨立編號',
+    name varchar(255) NOT NULL COMMENT'姓名',
+    username varchar(255) NOT NULL COMMENT'帳戶名稱',
+    password varchar(255) NOT NULL COMMENT'帳戶密碼',
+    follower_count INT unsigned NOT NULL DEFAULT 0 COMMENT'追蹤者數量',
+    time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT'註冊時間'
+);
+	
+
+INSERT INTO member(
+	name,
+	username,
+	password,
+	follower_count
+) VALUES (
+	'Olivia',
+    'olivia3310',
+    '3310olivia',
+    0
+);
+SELECT * FROM member;
+SELECT * FROM member ORDER BY time DESC;
+SELECT * FROM member ORDER BY time DESC LIMIT 2,4;
+SELECT * FROM member WHERE username='test';
+SELECT * FROM member WHERE username='test' and password='test';
+SET SQL_SAFE_UPDATES=0;
+UPDATE member SET name='test2' WHERE username='test';
+
+SELECT COUNT(*) as '資料總筆數' FROM member;
+SELECT SUM(follower_count) as '會員追蹤總人數' FROM member;
+SELECT AVG(follower_count) as '追蹤平均人數' FROM member;
+
+SHOW databases;
+CREATE DATABASE massage;
+DROP DATABASE massage;
+USE website;
+
+CREATE TABLE message (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT'獨立編號',
+    member_id BIGINT NOT NULL COMMENT'留言者會員編號',
+    FOREIGN KEY(member_id) REFERENCES member(id),
+    content varchar(255) NOT NULL COMMENT'留言內容',
+    like_count INT UNSIGNED NOT NULL DEFAULT 0 COMMENT'按讚的數量',
+    time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT'留言時間'
+);
+
+SHOW TABLES;
+SELECT * FROM message;
+
+INSERT INTO message(
+	member_id,
+    content,
+    like_count
+) VALUES(
+	4,
+    'SO CUTE!',
+    10
+);
+SELECT message.member_id, member.name, member.username, AVG(message.like_count) AS '平均按讚'
+FROM message INNER JOIN member ON message.member_id=member.id
+WHERE member.username='test';
+
