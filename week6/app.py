@@ -1,6 +1,5 @@
 # 連線到資料庫
 
-from asyncio.windows_events import NULL
 import mysql.connector
 websiteDB = mysql.connector.connect (
     host="localhost",
@@ -8,6 +7,7 @@ websiteDB = mysql.connector.connect (
     password="",
     database="website"
 )
+
 webCursor = websiteDB.cursor()
 
 from flask import Flask
@@ -36,7 +36,7 @@ def signin():
     if username =="" or password =="":
         return redirect(url_for("error",message="請輸入帳號密碼"))
     if request.method == 'POST':
-        varifySQL = "SELECT name, username, password FROM member WHERE username= '%s' "%(username)
+        varifySQL = "SELECT name, username, password, id FROM member WHERE username= '%s' "%(username)
         webCursor.execute(varifySQL)
         List = webCursor.fetchall()
         if List == []:
@@ -44,6 +44,7 @@ def signin():
         else:
             if password == List[0][2]:
                 session['username'] = List[0][0]
+                session['member_id'] = List[0][3]
                 return redirect("/member")
             else:
                 return redirect(url_for("error",message="密碼輸入錯誤"))
@@ -54,14 +55,35 @@ def signin():
 def member():
     if 'username' in session:
         name=session["username"]
-        return render_template("member.html",n=name)
+        showmsgSQL = "SELECT member.name, message.content, message.like_count FROM message INNER JOIN member ON message.member_id=member.id"
+        webCursor.execute(showmsgSQL)
+        msg = webCursor.fetchall()
+        showMsg = ""
+        for row in msg:
+            m = row[0]+'說：'+row[1]
+            showMsg = showMsg + str(m) + '\n'
+        showMsg = showMsg.replace('\n','<br/>')
+        return render_template("member.html",n=name, m=showMsg)
     else:
         return redirect("/")
+
+    
 
 @app.route("/error")
 def error():
     message=request.args.get("message")
     return render_template("error.html",data=message)
+
+@app.route("/message", methods=['POST'])
+def message():
+    member_id=session['member_id']
+    content=request.form["message"]
+    # print(content)
+    addmessageSQL = """INSERT INTO message(member_id, content) VALUES(%s, %s)"""
+    addMessage=(member_id, content)
+    webCursor.execute(addmessageSQL, addMessage)
+    websiteDB.commit()
+    return redirect("/member")
 
 @app.route("/signout")
 def signout():
@@ -89,7 +111,7 @@ def signup():
         return render_template("signup.html")
     else:
         return redirect(url_for("error",message="帳號已經被註冊"))
-        
+  
 
 
 @app.route("/square/<square_num>")
