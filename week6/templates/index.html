@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首頁</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div class="login_box">
+
+        <div class="header">歡迎光臨。請登入或註冊</div>
+        <div class="login_form">
+            <form action="/signin" method="post">
+                <p>登入系統</p>
+                <span>帳號　</span><input type="text" name="username" id="username" required>
+                <br>
+                <span>密碼　</span><input type="password" name="password" id="password" required>
+                <br>
+                <button>登入</button>
+            </form>
+        </div>
+        <hr>
+        <div class="signup">
+            <div class="signup_form_title">註冊帳號</div>
+            <form action="/signup" method="post">
+                <span>姓名　</span><input type="text" name="newname" id="newname" required>
+                <br>
+                <span>帳號　</span><input type="text" name="newusername" id="newusername" required>
+                <br>
+                <span>密碼　</span><input type="password" name="newpassword" id="newpassword" required>
+                <br>
+                <button>註冊</button>
+            </form>
+        </div>
+        <hr>
+        <div class="square_form">
+            <div class="square_form_title">計算正整數的平方</div>
+            <form action="{{ url_for('count') }}" method="get">
+                <span>正整數　</span><input type="number" name="sq-number" id="sq-number">
+                <button>計算</button>
+            </form>
+        </div>
+        
+
+    </div>
+    
+</body>
+</html>

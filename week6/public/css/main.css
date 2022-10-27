@@ -1,0 +1,41 @@
+.login_box {
+    margin: 100px auto;
+    width: 600px;
+    background-color: rgb(246, 246, 246);
+    text-align: center;
+}
+
+.header {
+    background-color: rgb(227, 217, 206);
+    padding: 20px;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.login_form, .square_form {
+    font-weight: 600;
+    padding: 10px;
+}
+
+.login_form button, .square_form button, .signup button {
+    margin:15px;
+    padding: 8px;
+    background-color: rgb(227, 217, 206);
+    border: none;
+    color:rgb(145, 134, 127)
+}
+
+.square_form_title {
+    font-weight: 600;
+}
+
+.signup_form_title {
+    font-weight: 600;
+    padding: 15px;
+    letter-spacing: .5px;
+}
+
+.signup span {
+    font-weight: 600;
+}
+
