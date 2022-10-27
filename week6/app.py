@@ -1,5 +1,6 @@
 # 連線到資料庫
 
+from asyncio.windows_events import NULL
 import mysql.connector
 websiteDB = mysql.connector.connect (
     host="localhost",
@@ -7,30 +8,7 @@ websiteDB = mysql.connector.connect (
     password="",
     database="website"
 )
-
-print(websiteDB)
 webCursor = websiteDB.cursor()
-
-sql = """SELECT * FROM member"""
-addsql = """INSERT INTO member(name, username, password) VALUES (%s, %s, %s)"""
-
-
-webCursor.execute(sql)
-List = webCursor.fetchall()
-
-usernameList =[]
-passwordList =[]
-nameList =[]
-for x in List:
-    usernameList= usernameList+[x[2]]
-    passwordList= passwordList+[x[3]]
-    nameList= nameList+[x[1]]
-    
-# print(username in usernameList)
-# number = int(usernameList.index(username))
-# print(webCursor)
-
-
 
 from flask import Flask
 from flask import request
@@ -39,9 +17,9 @@ from flask import render_template
 from flask import session
 from flask import url_for
 
-
 app = Flask(__name__, static_folder="public", static_url_path="/")
 app.secret_key = 'u3f9a82m4'
+
 # 首頁
 @app.route("/")
 def index():
@@ -55,24 +33,21 @@ def index():
 def signin():
     username=request.form["username"]
     password=request.form["password"]
+    if username =="" or password =="":
+        return redirect(url_for("error",message="請輸入帳號密碼"))
     if request.method == 'POST':
-        webCursor.execute(sql)
+        varifySQL = "SELECT name, username, password FROM member WHERE username= '%s' "%(username)
+        webCursor.execute(varifySQL)
         List = webCursor.fetchall()
-        usernameList =[]
-        passwordList =[]
-        nameList =[]
-        for x in List:
-            usernameList= usernameList+[x[2]]
-            passwordList= passwordList+[x[3]]
-            nameList= nameList+[x[1]]
-        if username in usernameList and password == passwordList[int(usernameList.index(username))]:
-            number = int(usernameList.index(username))
-            session['username'] = nameList[number]
-            return redirect("/member")
-        elif username =="" or password == "":
-            return redirect(url_for("error",message="請輸入帳號密碼"))
-        else: 
-            return redirect(url_for("error",message="帳號、或密碼輸入錯誤"))
+        if List == []:
+            return redirect(url_for("error",message="帳號輸入錯誤或無此帳號"))
+        else:
+            if password == List[0][2]:
+                session['username'] = List[0][0]
+                return redirect("/member")
+            else:
+                return redirect(url_for("error",message="密碼輸入錯誤"))
+
 
 
 @app.route("/member")
@@ -102,22 +77,19 @@ def signup():
     newname=request.form["newname"]
     newusername=request.form["newusername"]
     newpassword=request.form["newpassword"]
-    webCursor.execute(sql)
+    varifySQL = "SELECT username, password FROM member WHERE username= '%s' "%(newusername)
+    webCursor.execute(varifySQL)
     List = webCursor.fetchall()
-    usernameList =[]
-    passwordList =[]
-    nameList =[]
-    for x in List:
-        usernameList= usernameList+[x[2]]
-        passwordList= passwordList+[x[3]]
-        nameList= nameList+[x[1]]
-    if newusername in usernameList:
-        return redirect(url_for("error",message="帳號已經被註冊"))
-    else:
+    
+    if List == []:
         addData=(newname, newusername, newpassword)
-        webCursor.execute(addsql, addData)
+        addSQL = "INSERT INTO member(name, username, password) VALUES (%s, %s, %s)"
+        webCursor.execute(addSQL, addData)
         websiteDB.commit() 
         return render_template("signup.html")
+    else:
+        return redirect(url_for("error",message="帳號已經被註冊"))
+        
 
 
 @app.route("/square/<square_num>")
