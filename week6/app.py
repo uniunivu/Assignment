@@ -36,8 +36,9 @@ def signin():
     if username =="" or password =="":
         return redirect(url_for("error",message="請輸入帳號密碼"))
     if request.method == 'POST':
-        varifySQL = "SELECT name, username, password, id FROM member WHERE username= '%s' "%(username)
-        webCursor.execute(varifySQL)
+        signinData=[username]
+        varifySQL = "SELECT name, username, password, id FROM member WHERE username= %s"
+        webCursor.execute(varifySQL, signinData)
         List = webCursor.fetchall()
         if List == []:
             return redirect(url_for("error",message="帳號輸入錯誤或無此帳號"))
@@ -99,8 +100,9 @@ def signup():
     newname=request.form["newname"]
     newusername=request.form["newusername"]
     newpassword=request.form["newpassword"]
-    varifySQL = "SELECT username, password FROM member WHERE username= '%s' "%(newusername)
-    webCursor.execute(varifySQL)
+    varifyData=[newusername]
+    varifySQL = "SELECT username, password FROM member WHERE username= %s"
+    webCursor.execute(varifySQL, varifyData)
     List = webCursor.fetchall()
     
     if List == []:
